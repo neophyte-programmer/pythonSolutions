@@ -1,11 +1,26 @@
-# Given seconds, calculate the hours, minutes and seconds
+A, B, C, D = 0, 0, 0, 0
+#
+# while A <= 10:
+#     A += 2
+#     if A%3 == 0:
+#         B += 1
+#     else:
+#         C += 1
+#     D += 1
+#
+#     print(A)
+#
+# print(f"{A}, {B}, {C}, {D}")
 
-secs_string = input("Input seconds: ")  # do not change this line
-secs_int = int(secs_string)
-hours = secs_int // 3600
-remainder = secs_int % 3600
-minutes = remainder // 60
-remainder = remainder % 60
-seconds = remainder
+for N in range(11):
+    if N%2 == 0:
+        A += 1
+    elif N%3 ==0:
+        B += 1
+    else:
+        C += 1
 
-print(hours, ":", minutes, ":", seconds) # do not change this line
+    print(f"{A}, {B}, {C}, {N}")
+
+
+print(f"\n\n{A}, {B}, {C}, {N}")
