@@ -12,7 +12,7 @@ user_start = input("Would you like to continue (A/B)? ")
 while user_start == "A":
     customer_code = input("Customer code (BD, D, W): ")
     while not (customer_code == "BD" or customer_code == "D" or customer_code == "W"):
-        print("* Invalid Customer code. Try again***")
+        print("*** Invalid Customer code. Try again ***")
         customer_code = input("Customer code (BD, D, W): ")
         if customer_code == "BD" or customer_code == "D" or customer_code == "W":
             break
@@ -27,9 +27,9 @@ while user_start == "A":
     base_charge = 0
     mileage_charge = 0
     avg_daily = miles_driven / rental_days
-    weeks = (rental_days / 7)
+    weeks = math.ceil(rental_days / 7)
 
-    avg_weekly = miles_driven - (1500 * math.ceil(weeks))
+    avg_weekly = miles_driven - (1500 * weeks)
 
     if customer_code == "BD":
         if o_start > o_end:
@@ -39,7 +39,6 @@ while user_start == "A":
         else:
             base_charge = 40.00 * rental_days
             mileage_charge = 0.25 * miles_driven
-
 
     elif customer_code == "D":
         base_charge = 60.00 * rental_days
@@ -53,10 +52,10 @@ while user_start == "A":
         base_charge = 190.00 * weeks
         if avg_weekly < 900:
             mileage_charge = 0
-        elif avg_weekly > 900 and avg_weekly <= 1500:
-            mileage_charge = 100 * math.ceil(weeks)
+        elif 900 < avg_weekly <= 1500:
+            mileage_charge = 100 * weeks
         else:
-            mileage_charge = (200 * math.ceil(weeks)) + ((avg_weekly - 1500) * 0.25)
+            mileage_charge = (200 * weeks) + ((avg_weekly - 1500) * 0.25)
 
     amount_due = base_charge + mileage_charge
 
@@ -66,7 +65,7 @@ while user_start == "A":
     print("\todometer reading at start:", o_start)
     print("\todometer reading at end:", o_end)
     print("\tnumber of miles driven:", miles_driven)
-    print("\tamount due: $", amount_due)
+    print("\tamount due: $", round(amount_due, 2))
 
     user_start = input("Would you like to continue (A/B)? ")
 
