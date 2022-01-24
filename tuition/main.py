@@ -1,5 +1,6 @@
 # Initialising Variables
 college = None
+college_answer = None
 james_college = None
 program_start = True
 
@@ -29,13 +30,17 @@ while program_start:
 
     school_credits = input("Credits: ")
     verify_credit = school_credits.isdigit()
-    credit_int = int(school_credits)
+    if verify_credit == True:
+        credit_int = int(school_credits)
 
+    # print(verify_credit)
     # Verification Loop for Letter
-    while not verify_credit:
+    while verify_credit == False:
         print("Invalid input. Try again.")
         school_credits = input("Credits: ")
         verify_credit = school_credits.isdigit()
+        if verify_credit == True:
+            credit_int = int(school_credits)
         if verify_credit == True:
             break
 
@@ -43,18 +48,11 @@ while program_start:
     while credit_int <= 0:
         print("Invalid input. Try again.")
         school_credits = input("Credits: ")
-        credit_int = int(school_credits)
+        verify_credit = school_credits.isdigit()
+        if verify_credit == True:
+            credit_int = int(school_credits)
         if credit_int > 0:
             break
-
-    # Verification Loop for both Letter and 0
-    # while credit_int <= 0 and not verify_credit:
-    #     print("Invalid input. Try again.")
-    #     school_credits = input("Credits: ")
-    #     credit_int = int(school_credits)
-    #     verify_credit = school_credits.isdigit()
-    #     if credit_int > 0 and verify_credit == True:
-    #         break
 
 # Calculations
     # Variables and Constants
@@ -110,6 +108,7 @@ while program_start:
         be_junior = 8595 + (difference * 573)
         be_senior = 8595 + (difference * 573)
 
+    # Calculation for Freshman
     if level == "freshman":
         if college == "business" or college == "engineering":
             if credit_int <= 4:
@@ -145,6 +144,7 @@ while program_start:
                 if credit_int >= 6:
                     tuition_fee += news_tax
 
+    # Calculation for Sophomore
     elif level == "sophomore":
         if college == "business" or college == "engineering":
             if credit_int <= 4:
@@ -193,26 +193,31 @@ while program_start:
                     if college_answer == "yes":
                         tuition_fee += 670
 
+    # Calculation for Junior
     elif level == "junior":
         if college == "business" or college == "engineering":
             if credit_int <= 4:
-                tuition_fee = be_sophomore + radio_tax
+                tuition_fee = be_junior + radio_tax
                 if college_answer == "yes":
                     tuition_fee += 402
+                if college == "business":
+                    tuition_fee += 113
             else:
-                tuition_fee = be_sophomore + all_undergrad_tax + radio_tax
+                tuition_fee = be_junior + all_undergrad_tax + radio_tax
                 if credit_int >= 6:
                     tuition_fee += news_tax
                 if college_answer == "yes":
                     tuition_fee += 670
+                if college == "business":
+                    tuition_fee += 226
 
         elif college == "health" or college == "sciences":
             if credit_int <= 4:
-                tuition_fee = regular_sophomore + radio_tax
+                tuition_fee = regular_junior + radio_tax + 50
                 if college_answer == "yes":
                     tuition_fee += 402
             else:
-                tuition_fee = regular_sophomore + all_undergrad_tax + radio_tax
+                tuition_fee = regular_junior + all_undergrad_tax + radio_tax + 100
                 if college_answer == "yes":
                     tuition_fee += 670
                 if credit_int >= 6:
@@ -220,31 +225,81 @@ while program_start:
 
         elif james_college == "yes":
             if credit_int <= 4:
-                tuition_fee = regular_sophomore + radio_tax + james_college_tax
+                tuition_fee = regular_junior + radio_tax + james_college_tax
                 if college_answer == "yes":
                     tuition_fee += 402
             else:
-                tuition_fee = regular_sophomore + all_undergrad_tax + radio_tax + james_college_tax
+                tuition_fee = regular_junior + all_undergrad_tax + radio_tax + james_college_tax
                 if credit_int >= 6:
                     tuition_fee += news_tax
                     if college_answer == "yes":
                         tuition_fee += 670
         else:
             if credit_int <= 4:
-                tuition_fee = regular_sophomore + radio_tax
+                tuition_fee = regular_junior + radio_tax
                 if college_answer == "yes":
                     tuition_fee += 402
             else:
-                tuition_fee = regular_sophomore + all_undergrad_tax + radio_tax
+                tuition_fee = regular_junior + all_undergrad_tax + radio_tax
+                if credit_int >= 6:
+                    tuition_fee += news_tax
+                    if college_answer == "yes":
+                        tuition_fee += 670
+    # Calculation for Senior
+    elif level == "senior":
+        if college == "business" or college == "engineering":
+            if credit_int <= 4:
+                tuition_fee = be_senior + radio_tax
+                if college_answer == "yes":
+                    tuition_fee += 402
+                if college == "business":
+                    tuition_fee += 113
+            else:
+                tuition_fee = be_senior + all_undergrad_tax + radio_tax
+                if credit_int >= 6:
+                    tuition_fee += news_tax
+                if college_answer == "yes":
+                    tuition_fee += 670
+                if college == "business":
+                    tuition_fee += 226
+
+        elif college == "health" or college == "sciences":
+            if credit_int <= 4:
+                tuition_fee = regular_senior + radio_tax + 50
+                if college_answer == "yes":
+                    tuition_fee += 402
+            else:
+                tuition_fee = regular_senior + all_undergrad_tax + radio_tax + 100
+                if college_answer == "yes":
+                    tuition_fee += 670
+                if credit_int >= 6:
+                    tuition_fee += news_tax
+
+        elif james_college == "yes":
+            if credit_int <= 4:
+                tuition_fee = regular_senior + radio_tax + james_college_tax
+                if college_answer == "yes":
+                    tuition_fee += 402
+            else:
+                tuition_fee = regular_senior + all_undergrad_tax + radio_tax + james_college_tax
+                if credit_int >= 6:
+                    tuition_fee += news_tax
+                    if college_answer == "yes":
+                        tuition_fee += 670
+        else:
+            if credit_int <= 4:
+                tuition_fee = regular_senior + radio_tax
+                if college_answer == "yes":
+                    tuition_fee += 402
+            else:
+                tuition_fee = regular_senior + all_undergrad_tax + radio_tax
                 if credit_int >= 6:
                     tuition_fee += news_tax
                     if college_answer == "yes":
                         tuition_fee += 670
 
-    elif level == "senior":
-        pass
-
-    print("Tuition is $", tuition_fee)
+    # Print tuition fees with correct formatting
+    print("Tuition is ${:,.2f}.".format(tuition_fee))
 
     # Restart Program
     user_continue = input("Do you want to do another calculation (yes/no): ").lower()
